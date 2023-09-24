@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+package search.task;
+
+message TaskRequest {
+  int32 taskId = 1;
+}
+
+message TaskResponse {
+  message MeiliSearchErrorInfo {
+    string code = 1;
+    string link = 2;
+    string message = 3;
+    string type = 4;
+  }
+
+  string indexUid = 1;
+  string status = 2;
+  string type = 3;
+  int32 uid = 4;
+  int32 canceledBy = 5;
+  MeiliSearchErrorInfo error = 6;
+  string duration = 7;
+  string startedAt = 8;
+  string enqueuedAt = 9;
+  string finishedAt = 10;
+}
+
+service SearchTaskService {
+  rpc GetTask(TaskRequest) returns (TaskResponse) {};
+}

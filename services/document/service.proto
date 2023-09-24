@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package search.document;
+
+message Empty {}
+
+message SearchDocumentAddRequest {
+  string id = 1;
+  string title = 2;
+  string description = 3;
+  string image = 4;
+}
+
+message TaskQueuedResponse {
+  uint32 taskId = 1;
+}
+
+service SearchDocumentService {
+  rpc CreateIndex(Empty) returns (TaskQueuedResponse) {};
+  rpc AddDocument(SearchDocumentAddRequest) returns (TaskQueuedResponse) {};
+  rpc DeleteIndex(Empty) returns (Empty) {};
+}
